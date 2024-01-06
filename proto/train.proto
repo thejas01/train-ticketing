@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option go_package = "github.com/thejas01/train-ticketing/proto";
+
+message User {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+}
+
+message Receipt {
+    string from = 1;
+    string to = 2;
+    User user = 3;
+    float price_paid = 4;
+}
+
+message TicketRequest {
+    string from = 1;
+    string to = 2;
+    User user = 3;
+}
+
+message SeatAllocationRequest {
+    string section = 1;
+    User user = 2;
+}
+
+message SeatAllocationResponse {
+    string seat = 1;
+}
+
+message ReceiptRequest {
+    string user_id = 1;
+}
+
+message RemoveUserRequest {
+    string user_id = 1;
+}
+
+message RemoveUserResponse {
+    bool success = 1;
+}
+
+message ModifySeatRequest {
+    string user_id = 1;
+    string new_seat = 2;
+}
+
+message ModifySeatResponse {
+    bool success = 1;
+}
+
+message ViewUsersRequest {
+    string section = 1;
+}
+
+message SeatDetails {
+    string seat = 1;
+    User user = 2;
+}
+
+service TrainService {
+    rpc PurchaseTicket(TicketRequest) returns (Receipt);
+    rpc AllocateSeat(SeatAllocationRequest) returns (SeatAllocationResponse);
+    rpc GetReceiptDetails(ReceiptRequest) returns (Receipt);
+    rpc ViewUsersBySection(ViewUsersRequest) returns (stream SeatDetails);
+    rpc RemoveUser(RemoveUserRequest) returns (RemoveUserResponse);
+    rpc ModifySeat(ModifySeatRequest) returns (ModifySeatResponse);
+}
