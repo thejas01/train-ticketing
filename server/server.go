@@ -134,7 +134,6 @@ func (s *trainServer) ModifySeat(ctx context.Context, req *train.ModifySeatReque
 	userID := req.UserId
 	newSeat := req.NewSeat
 
-	// Check and modify in Section A
 	if user, found := s.sectionA[userID]; found {
 		oldSeat := fmt.Sprintf("A_%d", user)
 		s.sectionA[userID] = &train.User{
