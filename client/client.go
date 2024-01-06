@@ -19,7 +19,6 @@ func main() {
 
 	client := train.NewTrainServiceClient(conn)
 
-	// Example: Purchase Ticket
 	receipt, err := client.PurchaseTicket(context.Background(), &train.TicketRequest{
 		From: "London",
 		To:   "France",
@@ -35,7 +34,6 @@ func main() {
 
 	fmt.Printf("Receipt: %+v\n", receipt)
 
-	// Example: Allocate Seat
 	seatResponse, err := client.AllocateSeat(context.Background(), &train.SeatAllocationRequest{
 		Section: "A",
 		User: &train.User{
@@ -50,7 +48,6 @@ func main() {
 
 	fmt.Printf("Allocated Seat: %s\n", seatResponse.Seat)
 
-	// Example: View Users by Section
 	viewStream, err := client.ViewUsersBySection(context.Background(), &train.ViewUsersRequest{
 		Section: "A",
 	})
@@ -67,7 +64,6 @@ func main() {
 		fmt.Printf("Seat: %s, User: %+v\n", userDetails.Seat, userDetails.User)
 	}
 
-	// Example: Remove User
 	removeUserResponse, err := client.RemoveUser(context.Background(), &train.RemoveUserRequest{
 		UserId: "john.doe@example.com",
 	})
@@ -81,7 +77,6 @@ func main() {
 		fmt.Println("User not found.")
 	}
 
-	// Example: Modify User's Seat
 	modifySeatResponse, err := client.ModifySeat(context.Background(), &train.ModifySeatRequest{
 		UserId:  "alice.smith@example.com",
 		NewSeat: "A_10",
@@ -96,7 +91,6 @@ func main() {
 		fmt.Println("User not found or seat modification failed.")
 	}
 
-	// Example: Get Receipt Details
 	receiptDetails, err := client.GetReceiptDetails(context.Background(), &train.ReceiptRequest{
 		UserId: "alice.smith@example.com",
 	})
