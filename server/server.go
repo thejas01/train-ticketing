@@ -18,8 +18,6 @@ type trainServer struct {
 	receipts map[string]*train.Receipt
 }
 
-func (s *trainServer) mustEmbedUnimplementedTrainServiceServer() {}
-
 func (s *trainServer) PurchaseTicket(ctx context.Context, req *train.TicketRequest) (*train.Receipt, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
