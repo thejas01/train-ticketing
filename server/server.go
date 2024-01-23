@@ -16,6 +16,7 @@ type trainServer struct {
 	sectionA map[string]*train.User
 	sectionB map[string]*train.User
 	receipts map[string]*train.Receipt
+	train.UnimplementedTrainServiceServer
 }
 
 func (s *trainServer) PurchaseTicket(ctx context.Context, req *train.TicketRequest) (*train.Receipt, error) {
